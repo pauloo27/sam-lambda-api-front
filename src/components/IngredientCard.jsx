@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { API_URL } from "../api/api";
+import { Button } from "./Button";
 
 const Container = styled.div`
   background-color: #fde767;
@@ -18,30 +19,15 @@ const InputContainer = styled.div`
   align-items: center;
 `;
 
-const Button = styled.button`
-  background-color: #f3b95f;
-  border: 1px solid #000;
-  padding: 5px;
-  margin-top: 10px;
-  cursor: pointer;
-`;
-
-export function IngredientCard({ ingredient: { id, name, availableAmount } }) {
+export function IngredientCard({
+  ingredient: { name, availableAmount },
+  disabled,
+  onUpdate,
+}) {
   const [amount, setAmount] = React.useState(availableAmount);
-  const [saving, setSaving] = React.useState(false);
 
   const handleChange = (event) => {
-    setAmount(event.target.value);
-  };
-
-  const handleSave = () => {
-    setSaving(true);
-    fetch(`${API_URL}/ingredients/${id}`, {
-      method: "PUT",
-      body: JSON.stringify({ availableAmount: Number(amount) }),
-    }).then(() => {
-      setSaving(false);
-    });
+    setAmount(Number(event.target.value));
   };
 
   return (
@@ -50,7 +36,11 @@ export function IngredientCard({ ingredient: { id, name, availableAmount } }) {
       <InputContainer>
         <p>Available amount:</p>
         <input type="number" value={amount} onChange={handleChange} />
-        <Button onClick={handleSave} disabled={saving}>
+        <Button
+          onClick={() => onUpdate(amount)}
+          disabled={disabled}
+          type="secondary"
+        >
           Update
         </Button>
       </InputContainer>

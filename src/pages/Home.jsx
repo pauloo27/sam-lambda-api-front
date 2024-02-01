@@ -17,7 +17,7 @@ export function Home() {
     <>
       <h1>I am proud to welcome you to Burger Shot!</h1>
       <h2>
-        You can order <Link to="/orders">online (here)</Link> or on one of our
+        You can order <Link to="/orders">online (here)</Link> or at one of our
         stores:
       </h2>
       <StoresContainer>

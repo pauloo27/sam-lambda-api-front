@@ -11,14 +11,14 @@ const StyledFooter = styled.footer`
 `;
 
 const StyledImg = styled.img`
-  width: 150px;
+  width: 100px;
 `;
 
 export function Footer() {
   return (
     <StyledFooter>
       <div>
-        <p>Best viewed on</p>
+        <p>Best viewed in</p>
         <StyledImg src={netscapeLogo} alt="netscape logo" />
       </div>
     </StyledFooter>

@@ -8,9 +8,17 @@ const Container = styled.div`
   justify-content: center;
 `;
 
+const PageContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+
 export function ListIngredientsPresenter({ ingredients, saving, onUpdate }) {
   return (
-    <>
+    <PageContainer>
       <h1>Ingredients</h1>
       <Container>
         {ingredients.map((ingredient) => (
@@ -24,6 +32,6 @@ export function ListIngredientsPresenter({ ingredients, saving, onUpdate }) {
           />
         ))}
       </Container>
-    </>
+    </PageContainer>
   );
 }

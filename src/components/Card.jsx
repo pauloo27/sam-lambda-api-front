@@ -1,15 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
-const Container = styled.div`
-  background-color: #fde767;
-  margin: 20px;
-  padding: 10px;
-  width: 380px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
+import { CardContainer } from "./CardContainer";
 
 const Img = styled.img`
   width: 380px;
@@ -17,9 +8,9 @@ const Img = styled.img`
 
 export function Card({ src, alt, label }) {
   return (
-    <Container>
+    <CardContainer>
       <Img src={src} alt={alt} />
       <h3>{label}</h3>
-    </Container>
+    </CardContainer>
   );
 }

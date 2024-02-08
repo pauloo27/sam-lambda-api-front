@@ -3,11 +3,13 @@ import styled from "styled-components";
 import netscapeLogo from "../assets/netscape.jpg";
 
 const StyledFooter = styled.footer`
-  background: #fde767;
-  padding: 20px;
+  background-color: #030712;
+  border-top: 1px solid #1e293b;
+  padding: 10px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  gap: 10px;
 `;
 
 const StyledImg = styled.img`
@@ -17,10 +19,8 @@ const StyledImg = styled.img`
 export function Footer() {
   return (
     <StyledFooter>
-      <div>
-        <p>Best viewed in</p>
-        <StyledImg src={netscapeLogo} alt="netscape logo" />
-      </div>
+      <p>Best viewed in</p>
+      <StyledImg src={netscapeLogo} alt="netscape logo" />
     </StyledFooter>
   );
 }

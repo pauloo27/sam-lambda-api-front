@@ -7,6 +7,7 @@ import { Footer } from "./components/Footer";
 import { Home } from "./pages/Home";
 import { ListIngredients } from "./pages/ingredients/List";
 import { ListMenu } from "./pages/menu/List";
+import { CreateMenuItem } from "./pages/menu/Create";
 import { NotFound } from "./pages/NotFound";
 import styled from "styled-components";
 
@@ -32,6 +33,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route path="/" element={<Home />} />
             <Route path="/ingredients" element={<ListIngredients />} />
             <Route path="/menu" element={<ListMenu />} />
+            <Route path="/menu-create" element={<CreateMenuItem />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </ContentContainer>

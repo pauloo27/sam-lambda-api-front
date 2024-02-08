@@ -1,21 +1,22 @@
-import React from "react";
 import styled from "styled-components";
 
-const colors = {
-  primary: "#fcd849",
-  secondary: "#e88547",
-  danger: "#e8475a",
+const bgColors = {
+  primary: "#f8fafc",
+  secondary: "#1e293b",
+  danger: "#e11d48",
 };
 
-const StyledButton = styled.button`
-  background-color: ${({ type }) => colors[type] || colors.primary};
-  border: 1px solid #000;
-  padding: 5px 10px;
-  margin-top: 10px;
-  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
-  border-radius: 100px;
-`;
+const fgColors = {
+  primary: "#030712",
+  secondary: "#fff1f2",
+  danger: "#fff1f2",
+};
 
-export function Button({ children, ...props }) {
-  return <StyledButton {...props}>{children}</StyledButton>;
-}
+export const Button = styled.button`
+  background-color: ${({ color }) => bgColors[color] || bgColors.primary};
+  color: ${({ color }) => fgColors[color] || fgColors.primary};
+  padding: 8px 15px;
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+  border-radius: 0.5rem;
+  border: 1px solid #1e293b;
+`;

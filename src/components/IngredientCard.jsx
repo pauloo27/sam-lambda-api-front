@@ -1,22 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { API_URL } from "../api/api";
 import { Button } from "./Button";
-
-const Container = styled.div`
-  background-color: #fde767;
-  margin: 20px;
-  padding: 10px;
-  width: 380px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
+import { CardContainer } from "./CardContainer";
+import { Input } from "./Input";
 
 const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 20px;
 `;
 
 export function IngredientCard({
@@ -31,19 +23,19 @@ export function IngredientCard({
   };
 
   return (
-    <Container>
+    <CardContainer>
       <h3>{name}</h3>
       <InputContainer>
-        <p>Available amount:</p>
-        <input type="number" value={amount} onChange={handleChange} />
-        <Button
-          onClick={() => onUpdate(amount)}
-          disabled={disabled}
-          type="secondary"
-        >
+        <Input
+          label="Amount"
+          type="number"
+          value={amount}
+          onChange={handleChange}
+        />
+        <Button onClick={() => onUpdate(amount)} disabled={disabled}>
           Update
         </Button>
       </InputContainer>
-    </Container>
+    </CardContainer>
   );
 }

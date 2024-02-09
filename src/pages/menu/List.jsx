@@ -23,6 +23,12 @@ export function ListMenu() {
       .then((data) => setMenuItems(data));
   }, []);
 
+  const handleDelete = (id) => {
+    fetch(`${API_URL}/menu/${id}`, {
+      method: "DELETE",
+    }).then(() => window.location.reload());
+  };
+
   return (
     <PageContainer>
       <h1>Menu</h1>
@@ -31,7 +37,11 @@ export function ListMenu() {
       </Link>
       <Container>
         {menuItems.map((item) => (
-          <MenuItemViewer key={item.id} item={item} />
+          <MenuItemViewer
+            handleDelete={handleDelete}
+            key={item.id}
+            item={item}
+          />
         ))}
       </Container>
     </PageContainer>

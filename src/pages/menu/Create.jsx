@@ -34,6 +34,7 @@ export function CreateMenuItem() {
       body: JSON.stringify(formattedData),
     }).then(() => {
       setSaving(false);
+      window.location.href = "/menu";
     });
   };
 

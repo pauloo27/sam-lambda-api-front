@@ -1,19 +1,12 @@
 import React from "react";
 import { IngredientCard } from "../../components/IngredientCard";
 import styled from "styled-components";
+import { PageContainer } from "../../components/PageContainer";
 
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-`;
-
-const PageContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
 `;
 
 export function ListIngredientsPresenter({ ingredients, saving, onUpdate }) {

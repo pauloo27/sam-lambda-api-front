@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { MenuIngredientInput } from "../../components/MenuIngredientInput";
+import { PageContainer } from "../../components/PageContainer";
 
 const StyledForm = styled.form`
   display: flex;
@@ -15,18 +16,11 @@ const StyledForm = styled.form`
   width: min(100%, 400px);
 `;
 
-const PageContainer = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
 const IngredientsContainer = styled.div`
   display: flex;
   gap: 10px;
   flex-direction: column;
 `;
-
-let id = 0;
 
 export function CreatePresenter({
   onSubmit,

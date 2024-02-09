@@ -18,6 +18,10 @@ export const StyledLabel = styled.label`
 `;
 
 export function Input({ name, register, required, label, children, ...props }) {
+  if (register === undefined) {
+    register = () => {};
+  }
+
   if (label) {
     return (
       <StyledLabel>

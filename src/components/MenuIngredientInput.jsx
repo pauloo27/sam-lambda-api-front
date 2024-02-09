@@ -43,7 +43,7 @@ export function MenuIngredientInput({
         required
       />
       <Button type="button" color="danger" onClick={onRemove}>
-        Remove
+        <i className="bx bx-trash"></i>
       </Button>
     </Container>
   );

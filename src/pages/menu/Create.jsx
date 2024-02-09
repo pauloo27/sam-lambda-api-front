@@ -1,7 +1,9 @@
+import React, { useEffect, useState } from "react";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import styled from "styled-components";
 import { MenuIngredientInput } from "../../components/MenuIngredientInput";
+import { API_URL } from "../../api/api";
 
 const StyledForm = styled.form`
   display: flex;
@@ -19,20 +21,60 @@ const PageContainer = styled.div`
   justify-content: center;
 `;
 
+const IngredientsContainer = styled.div`
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+`;
+
 export function CreateMenuItem() {
+  const [ingredients, setIngredients] = useState([]);
+
+  useEffect(() => {
+    fetch(`${API_URL}/ingredients`)
+      .then((response) => response.json())
+      .then(setIngredients)
+      .catch((error) => console.error(error));
+  }, []);
+
+  const [data, setData] = useState({
+    name: "",
+    price: "",
+    ingredients: [],
+  });
+
+  const handleAddIngredient = () => {
+    setData((prev) => ({
+      ...prev,
+      ingredients: [
+        ...prev.ingredients,
+        {
+          ingredient: "",
+          quantity: "",
+        },
+      ],
+    }));
+  };
+
   return (
     <PageContainer>
       <StyledForm>
         <h1>Create Menu Item</h1>
-        <Input label="Name" placeholder="Ham Burger" />
-        <Input label="Price" placeholder="1.99" type="number" />
+        <Input label="Name" placeholder="Eg: Ham Burger" />
+        <Input label="Price" placeholder="Eg: 1.99" type="number" />
         <h3>Select the ingredients</h3>
-        <div>
-          <MenuIngredientInput />
-        </div>
-        <Button type="button" color="secondary">
+        <Button type="button" color="secondary" onClick={handleAddIngredient}>
           Add ingredient
         </Button>
+        <IngredientsContainer>
+          {data.ingredients.map((ingredient, index) => (
+            <MenuIngredientInput
+              ingredients={ingredients}
+              key={index}
+              ingredient={ingredient}
+            />
+          ))}
+        </IngredientsContainer>
         <Button type="submit" color="primary">
           Create
         </Button>

@@ -7,6 +7,7 @@ const StyledInput = styled.input`
   color: #f0f0f0;
   padding: 8px 15px;
   border-radius: 0.5rem;
+  width: ${({ small }) => (small ? "35px" : "auto")};
 `;
 
 const StyledLabel = styled.label`

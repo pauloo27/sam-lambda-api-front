@@ -25,18 +25,10 @@ export function Header() {
         <Logo />
       </Link>
       <StyledNav>
-        <StyledLink uppercase to="/">
-          Home
-        </StyledLink>
-        <StyledLink uppercase to="/orders">
-          Orders
-        </StyledLink>
-        <StyledLink uppercase to="/menu">
-          Menu
-        </StyledLink>
-        <StyledLink uppercase to="/ingredients">
-          Ingredients
-        </StyledLink>
+        <StyledLink to="/">Home</StyledLink>
+        <StyledLink to="/menu">Menu</StyledLink>
+        <StyledLink to="/orders">Orders</StyledLink>
+        <StyledLink to="/ingredients">Ingredients</StyledLink>
       </StyledNav>
     </StyledHeader>
   );

@@ -13,15 +13,15 @@ const Container = styled.div`
   align-items: end;
 `;
 
-export function MenuIngredientInput() {
+export function MenuIngredientInput({ ingredients }) {
   return (
     <Container>
       <Select>
-        <option>Ingredient 1</option>
-        <option>Ingredient 2</option>
-        <option>Ingredient 3</option>
+        {ingredients.map((ingredient) => (
+          <option key={ingredient.id}>{ingredient.name}</option>
+        ))}
       </Select>
-      <Input label="Amount" type="number" placeholder="1" />
+      <Input small label="Amount" type="number" placeholder="Eg: 1" />
       <Button type="button" color="danger">
         Remove
       </Button>

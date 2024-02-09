@@ -13,16 +13,36 @@ const Container = styled.div`
   align-items: end;
 `;
 
-export function MenuIngredientInput({ ingredients }) {
+export function MenuIngredientInput({
+  register,
+  ingredients,
+  onRemove,
+  index,
+}) {
   return (
     <Container>
-      <Select>
+      <Select
+        label="Ingredient"
+        name={`ingredients.${index}.id`}
+        register={register}
+        required
+      >
         {ingredients.map((ingredient) => (
-          <option key={ingredient.id}>{ingredient.name}</option>
+          <option value={ingredient.id} key={ingredient.id}>
+            {ingredient.name}
+          </option>
         ))}
       </Select>
-      <Input small label="Amount" type="number" placeholder="Eg: 1" />
-      <Button type="button" color="danger">
+      <Input
+        name={`ingredients.${index}.amount`}
+        register={register}
+        label="Amount"
+        type="number"
+        placeholder="Eg: 1"
+        small
+        required
+      />
+      <Button type="button" color="danger" onClick={onRemove}>
         Remove
       </Button>
     </Container>

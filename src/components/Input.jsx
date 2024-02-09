@@ -10,21 +10,27 @@ const StyledInput = styled.input`
   width: ${({ small }) => (small ? "35px" : "auto")};
 `;
 
-const StyledLabel = styled.label`
+export const StyledLabel = styled.label`
   display: flex;
   gap: 5px;
   flex-direction: column;
   font-size: 0.8rem;
 `;
 
-export function Input({ label, children, ...props }) {
+export function Input({ name, register, required, label, children, ...props }) {
   if (label) {
     return (
       <StyledLabel>
         {label}
-        <StyledInput {...props}>{children}</StyledInput>
+        <StyledInput {...register(name, { required })} {...props}>
+          {children}
+        </StyledInput>
       </StyledLabel>
     );
   }
-  return <StyledInput {...props}>{children}</StyledInput>;
+  return (
+    <StyledInput {...register(name, { required })} {...props}>
+      {children}
+    </StyledInput>
+  );
 }

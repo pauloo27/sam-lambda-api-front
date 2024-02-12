@@ -66,12 +66,26 @@ export function EditMenuItem() {
 
   const doSubmit = (data) => {
     setSaving(true);
-    // TODO:
+    const formattedData = {
+      ...data,
+      ingredients: data.ingredients.map((ingredient) => ({
+        ingredientId: Number(ingredient.id),
+        amount: Number(ingredient.amount),
+      })),
+    };
+    fetch(`${API_URL}/menu/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(formattedData),
+    }).then(() => {
+      setSaving(false);
+      window.location.href = "/menu";
+    });
   };
 
   return (
     <MenuForm
       title="Edit menu item"
+      submitBtn="Save"
       disabled={saving}
       onSubmit={doSubmit}
       register={register}

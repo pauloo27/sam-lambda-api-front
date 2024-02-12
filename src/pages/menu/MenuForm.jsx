@@ -24,6 +24,7 @@ const IngredientsContainer = styled.div`
 
 export function MenuForm({
   title,
+  submitBtn,
   onSubmit,
   onAddIngredient,
   onRemoveIngredient,
@@ -50,6 +51,9 @@ export function MenuForm({
           label="Price"
           placeholder="Eg: 1.99"
           type="number"
+          step="0.01"
+          min="0"
+          max="1000"
           register={register}
         />
         <h3>Select the ingredients</h3>
@@ -72,7 +76,7 @@ export function MenuForm({
           ))}
         </IngredientsContainer>
         <Button disabled={disabled} type="submit" color="primary">
-          Create
+          {submitBtn}
         </Button>
       </StyledForm>
     </PageContainer>

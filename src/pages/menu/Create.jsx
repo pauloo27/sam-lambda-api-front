@@ -60,6 +60,7 @@ export function CreateMenuItem() {
   return (
     <MenuForm
       title="Create new menu item"
+      submitBtn="Create"
       disabled={saving}
       onSubmit={doSubmit}
       register={register}

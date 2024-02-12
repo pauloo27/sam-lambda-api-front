@@ -9,6 +9,7 @@ import { Home } from "./pages/Home";
 import { ListIngredients } from "./pages/ingredients/List";
 import { ListMenu } from "./pages/menu/List";
 import { CreateMenuItem } from "./pages/menu/Create";
+import { EditMenuItem } from "./pages/menu/Edit";
 import { NotFound } from "./pages/NotFound";
 import styled from "styled-components";
 
@@ -35,6 +36,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route path="/ingredients" element={<ListIngredients />} />
             <Route path="/menu" element={<ListMenu />} />
             <Route path="/menu-create" element={<CreateMenuItem />} />
+            <Route path="/menu-edit/:id" element={<EditMenuItem />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </ContentContainer>

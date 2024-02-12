@@ -5,6 +5,7 @@ import { formatCurrency } from "../core/format";
 import styled from "styled-components";
 import { Button } from "./Button";
 import { ConfirmDialog } from "./ConfirmDialog";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -34,9 +35,11 @@ export function MenuItemViewer({ item, handleDelete }) {
         show={deleteDialog}
       />
       <Container>
-        <Button color="secondary">
-          <i className="bx bx-edit"></i>
-        </Button>
+        <Link to={`/menu-edit/${item.id}`}>
+          <Button color="secondary">
+            <i className="bx bx-edit"></i>
+          </Button>
+        </Link>
         <h4>{item.name}</h4>
         <Button color="danger" onClick={() => setDeleteDialog(true)}>
           <i className="bx bx-trash"></i>

@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import { API_URL } from "../../api/api";
 import { useForm, useFieldArray } from "react-hook-form";
 import { MenuForm } from "./MenuForm";
+import { useParams } from "react-router-dom";
 
-export function CreateMenuItem() {
+export function EditMenuItem() {
   const [ingredients, setIngredients] = useState([]);
   const [saving, setSaving] = useState(false);
+  const { id } = useParams();
+  console.log(id);
 
   useEffect(() => {
     fetch(`${API_URL}/ingredients`)
@@ -40,7 +43,7 @@ export function CreateMenuItem() {
 
   return (
     <MenuForm
-      title="Create new menu item"
+      title="Edit menu item"
       disabled={saving}
       onSubmit={doSubmit}
       register={register}

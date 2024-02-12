@@ -19,10 +19,11 @@ const StyledForm = styled.form`
 const IngredientsContainer = styled.div`
   display: flex;
   gap: 10px;
-  flex-direction: column;
+  flex-direction: columnV;
 `;
 
-export function CreatePresenter({
+export function MenuForm({
+  title,
   onSubmit,
   onAddIngredient,
   onRemoveIngredient,
@@ -35,7 +36,7 @@ export function CreatePresenter({
   return (
     <PageContainer>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
-        <h1>Create Menu Item</h1>
+        <h1>{title}</h1>
         <Input
           name="name"
           required

@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import { API_URL } from "../../api/api";
 import { ListIngredientsPresenter } from "./ListPresenter";
+import { useQuery } from "@tanstack/react-query";
 
 export function ListIngredients() {
-  const [ingredients, setIngredients] = React.useState([]);
   const [saving, setSaving] = React.useState(false);
-
   const handleUpdate = ({ id, amount }) => {
     setSaving(true);
     fetch(`${API_URL}/ingredients/${id}`, {
@@ -16,18 +15,18 @@ export function ListIngredients() {
     });
   };
 
-  useEffect(() => {
-    fetch(`${API_URL}/ingredients`)
-      .then((response) => response.json())
-      .then(setIngredients)
-      .catch((error) => console.error(error));
-  }, []);
+  const { isPending, error, data } = useQuery({
+    queryKey: ["listIngredients"],
+    queryFn: () => fetch(`${API_URL}/ingredients`).then((res) => res.json()),
+  });
 
   return (
     <ListIngredientsPresenter
+      pending={isPending}
+      error={error}
       saving={saving}
       onUpdate={handleUpdate}
-      ingredients={ingredients}
+      ingredients={data ?? []}
     />
   );
 }

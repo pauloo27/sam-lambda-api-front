@@ -12,6 +12,7 @@ import { CreateMenuItem } from "./pages/menu/Create";
 import { EditMenuItem } from "./pages/menu/Edit";
 import { NotFound } from "./pages/NotFound";
 import styled from "styled-components";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const MainContainer = styled.div`
   display: flex;
@@ -24,25 +25,29 @@ const ContentContainer = styled.div`
   padding: 50px;
 `;
 
+const queryClient = new QueryClient();
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <MainContainer>
-        <Header />
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <MainContainer>
+          <Header />
 
-        <ContentContainer>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/ingredients" element={<ListIngredients />} />
-            <Route path="/menu" element={<ListMenu />} />
-            <Route path="/menu-create" element={<CreateMenuItem />} />
-            <Route path="/menu-edit/:id" element={<EditMenuItem />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </ContentContainer>
+          <ContentContainer>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/ingredients" element={<ListIngredients />} />
+              <Route path="/menu" element={<ListMenu />} />
+              <Route path="/menu-create" element={<CreateMenuItem />} />
+              <Route path="/menu-edit/:id" element={<EditMenuItem />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </ContentContainer>
 
-        <Footer />
-      </MainContainer>
-    </BrowserRouter>
+          <Footer />
+        </MainContainer>
+      </BrowserRouter>
+    </QueryClientProvider>
   </React.StrictMode>
 );

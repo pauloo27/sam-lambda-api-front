@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { Button } from "../../components/Button";
 import { API_URL } from "../../api/api";
@@ -13,15 +14,10 @@ const Container = styled.div`
 `;
 
 export function ListMenu() {
-  const [menuItems, setMenuItems] = useState([]);
-
-  useEffect(() => {
-    fetch(`${API_URL}/menu`, {
-      method: "GET",
-    })
-      .then((response) => response.json())
-      .then((data) => setMenuItems(data));
-  }, []);
+  const { isPending, error, data } = useQuery({
+    queryKey: ["listMenu"],
+    queryFn: () => fetch(`${API_URL}/menu`).then((res) => res.json()),
+  });
 
   const handleDelete = (id) => {
     fetch(`${API_URL}/menu/${id}`, {
@@ -35,8 +31,10 @@ export function ListMenu() {
       <Link to="/menu-create">
         <Button>Create new menu item</Button>
       </Link>
+      {isPending && <p>Loading...</p>}
+      {error && <p>Error: {error.message}</p>}
       <Container>
-        {menuItems.map((item) => (
+        {(data ?? []).map((item) => (
           <MenuItemViewer
             handleDelete={handleDelete}
             key={item.id}

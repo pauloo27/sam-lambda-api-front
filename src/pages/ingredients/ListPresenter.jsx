@@ -9,10 +9,18 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-export function ListIngredientsPresenter({ ingredients, saving, onUpdate }) {
+export function ListIngredientsPresenter({
+  pending,
+  error,
+  ingredients,
+  saving,
+  onUpdate,
+}) {
   return (
     <PageContainer>
       <h1>Ingredients</h1>
+      {pending && <p>Loading...</p>}
+      {error && <p>Error: {error.message}</p>}
       <Container>
         {ingredients.map((ingredient) => (
           <IngredientCard

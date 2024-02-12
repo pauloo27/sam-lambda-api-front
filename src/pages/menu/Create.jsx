@@ -1,18 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { API_URL } from "../../api/api";
 import { useForm, useFieldArray } from "react-hook-form";
 import { MenuForm } from "./MenuForm";
+import { useQuery } from "@tanstack/react-query";
+import { PageContainer } from "../../components/PageContainer";
 
 export function CreateMenuItem() {
-  const [ingredients, setIngredients] = useState([]);
   const [saving, setSaving] = useState(false);
 
-  useEffect(() => {
-    fetch(`${API_URL}/ingredients`)
-      .then((response) => response.json())
-      .then(setIngredients)
-      .catch((error) => console.error(error));
-  }, []);
+  const {
+    isPending,
+    error,
+    data: ingredients,
+  } = useQuery({
+    queryKey: ["listIngredients"],
+    queryFn: () => fetch(`${API_URL}/ingredients`).then((res) => res.json()),
+  });
 
   const { control, register, handleSubmit: handleSubmit } = useForm();
   const { fields, append, remove } = useFieldArray({
@@ -37,6 +40,22 @@ export function CreateMenuItem() {
       window.location.href = "/menu";
     });
   };
+
+  if (isPending) {
+    return (
+      <PageContainer>
+        <p>Loading...</p>
+      </PageContainer>
+    );
+  }
+
+  if (error) {
+    return (
+      <PageContainer>
+        <p>Error: {error.message}</p>
+      </PageContainer>
+    );
+  }
 
   return (
     <MenuForm

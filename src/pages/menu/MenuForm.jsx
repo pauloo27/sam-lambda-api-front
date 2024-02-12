@@ -19,7 +19,7 @@ const StyledForm = styled.form`
 const IngredientsContainer = styled.div`
   display: flex;
   gap: 10px;
-  flex-direction: columnV;
+  flex-direction: column;
 `;
 
 export function MenuForm({

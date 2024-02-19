@@ -4,6 +4,7 @@ import { PageContainer } from "../../components/PageContainer";
 import { CardContainer } from "../../components/CardContainer";
 import { Badge } from "../../components/Badge";
 import { Button } from "../../components/Button";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -22,7 +23,7 @@ const Status = styled.span`
   background-color: ${({ status }) => statusColors[status]};
 `;
 
-const StatusContainer = styled.div`
+const InnerContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,6 +41,9 @@ export function ListOrdersPresenter({
   return (
     <PageContainer>
       <h1>Orders</h1>
+      <Link to="/orders-create">
+        <Button>Place new order</Button>
+      </Link>
       {pending && <p>Loading...</p>}
       {error && <p>Error: {error.message}</p>}
       <Container>
@@ -48,7 +52,7 @@ export function ListOrdersPresenter({
             <h3 style={{ textAlign: "center" }}>
               {order.customerName}'s order
             </h3>
-            <StatusContainer>
+            <InnerContainer>
               <Status status={order.status}>{order.status}</Status>
               <Button
                 disabled={disabled || order.status === "COMPLETED"}
@@ -57,14 +61,14 @@ export function ListOrdersPresenter({
               >
                 <i className="bx bx-check"></i>
               </Button>
-            </StatusContainer>
-            <div>
+            </InnerContainer>
+            <InnerContainer>
               {order.orderItems.map((item) => (
                 <span key={item.id}>
                   <Badge>{item.amount}x</Badge> {item.menuItem.name}
                 </span>
               ))}
-            </div>
+            </InnerContainer>
           </CardContainer>
         ))}
       </Container>

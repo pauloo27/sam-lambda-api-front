@@ -17,7 +17,7 @@ export function CreateMenuItem() {
     queryFn: () => fetch(`${API_URL}/ingredients`).then((res) => res.json()),
   });
 
-  const { control, register, handleSubmit: handleSubmit } = useForm();
+  const { control, register, handleSubmit } = useForm();
   const { fields, append, remove } = useFieldArray({
     control,
     name: "ingredients",
@@ -64,11 +64,11 @@ export function CreateMenuItem() {
       disabled={saving}
       onSubmit={doSubmit}
       register={register}
+      ingredients={ingredients}
       handleSubmit={handleSubmit}
       onAddIngredient={append}
       onRemoveIngredient={remove}
       ingredientsInput={fields}
-      ingredients={ingredients}
     />
   );
 }

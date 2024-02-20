@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { API_URL } from "../../api/api";
+import { getApiUrl } from "../../api/api";
 import { useForm, useFieldArray } from "react-hook-form";
 import { MenuForm } from "./MenuForm";
 import { useQuery } from "@tanstack/react-query";
@@ -16,7 +16,8 @@ export function EditMenuItem() {
     data: ingredients,
   } = useQuery({
     queryKey: ["listIngredients"],
-    queryFn: () => fetch(`${API_URL}/ingredients`).then((res) => res.json()),
+    queryFn: () =>
+      fetch(`${getApiUrl()}/ingredients`).then((res) => res.json()),
   });
 
   const {
@@ -25,7 +26,7 @@ export function EditMenuItem() {
     data: menuItem,
   } = useQuery({
     queryKey: ["getMenuItem", id],
-    queryFn: () => fetch(`${API_URL}/menu/${id}`).then((res) => res.json()),
+    queryFn: () => fetch(`${getApiUrl()}/menu/${id}`).then((res) => res.json()),
   });
 
   const isPending = isIngredientsPending || isMenuItemPending;
@@ -73,7 +74,7 @@ export function EditMenuItem() {
         amount: Number(ingredient.amount),
       })),
     };
-    fetch(`${API_URL}/menu/${id}`, {
+    fetch(`${getApiUrl()}/menu/${id}`, {
       method: "PUT",
       body: JSON.stringify(formattedData),
     }).then(() => {

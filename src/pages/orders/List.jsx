@@ -1,5 +1,5 @@
 import React from "react";
-import { API_URL } from "../../api/api";
+import { getApiUrl } from "../../api/api";
 import { ListOrdersPresenter } from "./ListPresenter";
 import { useQuery } from "@tanstack/react-query";
 
@@ -8,12 +8,12 @@ export function ListOrders() {
 
   const { isPending, error, data } = useQuery({
     queryKey: ["listOrders"],
-    queryFn: () => fetch(`${API_URL}/orders`).then((res) => res.json()),
+    queryFn: () => fetch(`${getApiUrl()}/orders`).then((res) => res.json()),
   });
 
   const handleComplete = (id) => {
     setSaving(true);
-    fetch(`${API_URL}/orders/${id}`, {
+    fetch(`${getApiUrl()}/orders/${id}`, {
       method: "PUT",
       body: JSON.stringify({ status: "COMPLETED" }),
     }).then(() => {

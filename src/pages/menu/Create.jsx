@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { API_URL } from "../../api/api";
+import { getApiUrl } from "../../api/api";
 import { useForm, useFieldArray } from "react-hook-form";
 import { MenuForm } from "./MenuForm";
 import { useQuery } from "@tanstack/react-query";
@@ -14,7 +14,8 @@ export function CreateMenuItem() {
     data: ingredients,
   } = useQuery({
     queryKey: ["listIngredients"],
-    queryFn: () => fetch(`${API_URL}/ingredients`).then((res) => res.json()),
+    queryFn: () =>
+      fetch(`${getApiUrl()}/ingredients`).then((res) => res.json()),
   });
 
   const { control, register, handleSubmit } = useForm();
@@ -32,7 +33,7 @@ export function CreateMenuItem() {
         amount: Number(ingredient.amount),
       })),
     };
-    fetch(`${API_URL}/menu/`, {
+    fetch(`${getApiUrl()}/menu/`, {
       method: "POST",
       body: JSON.stringify(formattedData),
     }).then(() => {

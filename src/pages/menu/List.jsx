@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { Button } from "../../components/Button";
-import { API_URL } from "../../api/api";
+import { getApiUrl } from "../../api/api";
 import { MenuItemViewer } from "../../components/MenuItemViewer";
 import styled from "styled-components";
 import { PageContainer } from "../../components/PageContainer";
@@ -16,11 +16,11 @@ const Container = styled.div`
 export function ListMenu() {
   const { isPending, error, data } = useQuery({
     queryKey: ["listMenu"],
-    queryFn: () => fetch(`${API_URL}/menu`).then((res) => res.json()),
+    queryFn: () => fetch(`${getApiUrl()}/menu`).then((res) => res.json()),
   });
 
   const handleDelete = (id) => {
-    fetch(`${API_URL}/menu/${id}`, {
+    fetch(`${getApiUrl()}/menu/${id}`, {
       method: "DELETE",
     }).then(() => window.location.reload());
   };

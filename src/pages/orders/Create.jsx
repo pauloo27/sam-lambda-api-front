@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { API_URL } from "../../api/api";
 import { useForm, useFieldArray } from "react-hook-form";
 import { useQuery } from "@tanstack/react-query";
 import { PageContainer } from "../../components/PageContainer";
 import { OrderForm } from "./OrderForm";
+import { getApiUrl } from "../../api/api";
 
 export function CreateOrder() {
   const [saving, setSaving] = useState(false);
@@ -14,7 +14,7 @@ export function CreateOrder() {
     data: menu,
   } = useQuery({
     queryKey: ["listMenu"],
-    queryFn: () => fetch(`${API_URL}/menu`).then((res) => res.json()),
+    queryFn: () => fetch(`${getApiUrl()}/menu`).then((res) => res.json()),
   });
 
   const { control, register, handleSubmit } = useForm();
@@ -48,7 +48,7 @@ export function CreateOrder() {
         amount: Number(item.amount),
       })),
     };
-    fetch(`${API_URL}/orders/`, {
+    fetch(`${getApiUrl()}/orders/`, {
       method: "POST",
       body: JSON.stringify(formattedData),
     }).then((res) => {
